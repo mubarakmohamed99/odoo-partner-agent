@@ -52,8 +52,7 @@ class DatabaseAgent:
 
     def init_odoo_db(self, db_name="odoo_db", admin_password="admin123"):
         """Initialize Odoo DB via XML-RPC"""
-        # Wait for Odoo server to start
-        time.sleep(15)
+        time.sleep(15)  # wait for Odoo server to start
         common = xmlrpc.client.ServerProxy("http://localhost:8069/xmlrpc/2/common")
         try:
             common.db.create_database(

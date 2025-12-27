@@ -1,0 +1,2 @@
+streamlit
+# TODO: add other dependencies such as langchain, openai, etc.

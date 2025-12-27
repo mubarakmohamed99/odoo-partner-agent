@@ -9,7 +9,8 @@ business = st.selectbox(
     ["Retail", "Services", "HR"]
 )
 
-st.write("✅ First-time deployment uses default database and user.")
+st.write("✅ First-time deployment uses default PostgreSQL user 'odoo_agent' and DB 'odoo_db'.")
+
 if st.button("Build My Odoo System"):
     orch = Orchestrator()
     orch.setup_odoo(business)

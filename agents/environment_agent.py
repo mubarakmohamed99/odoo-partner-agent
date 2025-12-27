@@ -35,9 +35,10 @@ class EnvironmentAgent:
             )
 
     def install_dependencies(self):
-        pip = os.path.join(BASE_DIR, "venv", "Scripts", "pip")
-        self.run_cmd(f"{pip} install wheel")
-        self.run_cmd(f"{pip} install -r odoo/requirements.txt", cwd=BASE_DIR)
+        # Use venv python to install pip packages
+        python = os.path.join(BASE_DIR, "venv", "Scripts", "python")
+        self.run_cmd(f"{python} -m pip install --upgrade pip setuptools wheel")
+        self.run_cmd(f"{python} -m pip install -r odoo/requirements.txt", cwd=BASE_DIR)
 
     def create_addons_dirs(self):
         os.makedirs(os.path.join(BASE_DIR, "addons"), exist_ok=True)

@@ -35,7 +35,6 @@ class EnvironmentAgent:
             )
 
     def install_dependencies(self):
-        # Use venv python to install pip packages
         python = os.path.join(BASE_DIR, "venv", "Scripts", "python")
         self.run_cmd(f"{python} -m pip install --upgrade pip setuptools wheel")
         self.run_cmd(f"{python} -m pip install -r odoo/requirements.txt", cwd=BASE_DIR)

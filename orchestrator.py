@@ -29,10 +29,10 @@ class Orchestrator:
         
         db_user = os.getenv("ODOO_DB_USER", "odoo_agent")
         db_password = os.getenv("ODOO_DB_PASSWORD", "agent123")
-        db_user, db_pass = db_agent.create_system_user(db_user=db_user, db_password=db_password)
+        db_agent.create_system_user(db_user=db_user, db_password=db_password)
         
         db_name = os.getenv("ODOO_DB_NAME", "odoo_db")
-        db_name = db_agent.create_db(db_name=db_name, db_user=db_user)
+        db_agent.create_db(db_name=db_name, db_user=db_user)
         
         admin_password = os.getenv("ODOO_ADMIN_PASSWORD", "admin123")
         db_agent.init_odoo_db(db_name, admin_password=admin_password)

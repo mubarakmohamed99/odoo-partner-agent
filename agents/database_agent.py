@@ -1,4 +1,5 @@
 import psycopg2
+from psycopg2 import sql
 import xmlrpc.client
 import time
 import os
@@ -30,7 +31,6 @@ class DatabaseAgent:
             cur.execute("SELECT 1 FROM pg_roles WHERE rolname=%s", (db_user,))
             if not cur.fetchone():
                 # Use safe identifier quoting to prevent SQL injection
-                from psycopg2 import sql
                 cur.execute(
                     sql.SQL("CREATE USER {} WITH PASSWORD %s SUPERUSER").format(
                         sql.Identifier(db_user)
@@ -58,7 +58,6 @@ class DatabaseAgent:
             cur.execute("SELECT 1 FROM pg_database WHERE datname=%s", (db_name,))
             if not cur.fetchone():
                 # Use safe identifier quoting to prevent SQL injection
-                from psycopg2 import sql
                 cur.execute(
                     sql.SQL("CREATE DATABASE {} OWNER {}").format(
                         sql.Identifier(db_name),

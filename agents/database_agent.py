@@ -41,7 +41,6 @@ class DatabaseAgent:
             conn.close()
         except Exception as e:
             print(f"⚠️ Could not create DB user: {e}")
-        return db_user, db_password
 
     def create_db(self, db_name="odoo_db", db_user="odoo_agent"):
         """Create a new database if it does not exist"""
@@ -68,7 +67,6 @@ class DatabaseAgent:
             conn.close()
         except Exception as e:
             print(f"⚠️ Could not create database: {e}")
-        return db_name
 
     def init_odoo_db(self, db_name="odoo_db", admin_password="admin123"):
         """Initialize Odoo DB via XML-RPC"""

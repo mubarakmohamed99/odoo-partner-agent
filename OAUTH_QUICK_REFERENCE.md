@@ -10,11 +10,11 @@ Example: `Iv1.1234567890abcdef`
 
 ### Client Secret Format:
 ```
-ghp_[alphanumeric characters]
+[random alphanumeric string]
 ```
-or other GitHub token format
+Note: GitHub OAuth App Client Secrets are random alphanumeric strings, different from Personal Access Tokens (which start with `ghp_`).
 
-Example: `ghp_1234567890abcdefghijklmnopqrstuvwxyz`
+Example: `1234567890abcdefghijklmnopqrstuvwxyzABCD`
 
 ## How to Use
 

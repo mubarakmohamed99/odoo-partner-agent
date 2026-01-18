@@ -29,7 +29,14 @@ class DatabaseAgent:
             cur = conn.cursor()
             cur.execute("SELECT 1 FROM pg_roles WHERE rolname=%s", (db_user,))
             if not cur.fetchone():
-                cur.execute(f"CREATE USER {db_user} WITH PASSWORD '{db_password}' SUPERUSER")
+                # Use safe identifier quoting to prevent SQL injection
+                from psycopg2 import sql
+                cur.execute(
+                    sql.SQL("CREATE USER {} WITH PASSWORD %s SUPERUSER").format(
+                        sql.Identifier(db_user)
+                    ),
+                    (db_password,)
+                )
             cur.close()
             conn.close()
         except Exception as e:
@@ -50,7 +57,14 @@ class DatabaseAgent:
             cur = conn.cursor()
             cur.execute("SELECT 1 FROM pg_database WHERE datname=%s", (db_name,))
             if not cur.fetchone():
-                cur.execute(f"CREATE DATABASE {db_name} OWNER {db_user}")
+                # Use safe identifier quoting to prevent SQL injection
+                from psycopg2 import sql
+                cur.execute(
+                    sql.SQL("CREATE DATABASE {} OWNER {}").format(
+                        sql.Identifier(db_name),
+                        sql.Identifier(db_user)
+                    )
+                )
             cur.close()
             conn.close()
         except Exception as e:

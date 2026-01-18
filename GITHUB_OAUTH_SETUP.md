@@ -65,8 +65,10 @@ Iv1.1234567890abcdef
 
 **Example Client Secret:**
 ```
-ghp_1234567890abcdefghijklmnopqrstuvwxyz
+1234567890abcdefghijklmnopqrstuvwxyzABCD
 ```
+
+Note: GitHub OAuth App Client Secrets are random alphanumeric strings. They're different from Personal Access Tokens (which start with `ghp_`).
 
 If you lose the secret, you'll need to generate a new one.
 

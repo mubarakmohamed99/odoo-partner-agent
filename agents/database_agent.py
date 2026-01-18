@@ -1,12 +1,19 @@
 import psycopg2
 import xmlrpc.client
 import time
+import os
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 class DatabaseAgent:
 
     def __init__(self, super_user="postgres", super_password="postgres"):
         self.super_user = super_user
         self.super_password = super_password
+        self.host = os.getenv("POSTGRES_HOST", "localhost")
+        self.port = int(os.getenv("POSTGRES_PORT", "5432"))
 
     def create_system_user(self, db_user="odoo_agent", db_password="agent123"):
         """Create PostgreSQL user if it does not exist"""
@@ -15,8 +22,8 @@ class DatabaseAgent:
                 dbname="postgres",
                 user=self.super_user,
                 password=self.super_password,
-                host="localhost",
-                port=5432
+                host=self.host,
+                port=self.port
             )
             conn.autocommit = True
             cur = conn.cursor()
@@ -36,8 +43,8 @@ class DatabaseAgent:
                 dbname="postgres",
                 user=self.super_user,
                 password=self.super_password,
-                host="localhost",
-                port=5432
+                host=self.host,
+                port=self.port
             )
             conn.autocommit = True
             cur = conn.cursor()
